@@ -286,7 +286,8 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   letter-spacing:.04em; font-size:12.5px; font-weight:500; color:var(--dim)}
 .eyebrow.he b{color:var(--lilac); font-weight:600}
 .fit{display:block; font-size:14.5px; line-height:1.7; color:var(--mist)}
-.waitnote{font-size:14px; color:var(--dim); margin:-14px auto 22px; max-width:42ch}
+.waitnote{font-size:clamp(16px,4.3vw,18px); font-weight:500; color:var(--paper);
+  margin:-10px auto 20px; max-width:34ch}
 .quote{position:relative; padding-inline-start:16px; border-inline-start:2px solid var(--lilac);
   font-size:16px; line-height:1.75; color:var(--paper); font-weight:400}
 </style>
@@ -318,7 +319,7 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
       <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
         <span class="sheen"></span>
         <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
-        כניסה לרשימת המתנה
+        השאירו פרטים כאן
       </a>
       <a class="btn ghost" href="https://www.instagram.com/accountech.ai" target="_blank" rel="noopener">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -483,12 +484,12 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   <section class="close" id="close">
     <h2 class="rv">הצטרפו למהפכה.</h2>
     <p class="lede rv" data-d="1" style="font-family:var(--latin);direction:ltr;letter-spacing:.005em">Finance is changing. AI is leading. Join the revolution</p>
-    <p class="waitnote rv" data-d="2">ההרשמה למחזור עוד לא נפתחה. השאירו פרטים ונעדכן אתכם ברגע שהיא נפתחת.</p>
+    <p class="waitnote rv" data-d="2">רוצים לקבל גישה להרשמה לפני כולם?</p>
     <div class="cta-row rv" data-d="3">
       <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
         <span class="sheen"></span>
         <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
-        כניסה לרשימת המתנה
+        השאירו פרטים כאן
       </a>
       <a class="btn ghost" href="https://www.instagram.com/accountech.ai" target="_blank" rel="noopener">אינסטגרם</a>
       <a class="btn ghost" href="https://www.linkedin.com/company/accountech-ai-community/" target="_blank" rel="noopener">לינקדאין</a>
@@ -512,13 +513,13 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
     <span class="sheen"></span>
     <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
-    כניסה לרשימת המתנה
+    השאירו פרטים כאן
   </a>
 </div>
 
 <script>
 (function () {
-  /* Where the "כניסה לרשימת המתנה" buttons go. Change it here, and in the
+  /* Where the "השאירו פרטים כאן" buttons go. Change it here, and in the
      three href="" fallbacks in the markup above (they matter only if JS is off).
      This is the short waiting-list form. When registration opens, swap it for the
      full registration form and change the button copy back to "טופס הרשמה":
