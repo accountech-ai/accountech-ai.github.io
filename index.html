@@ -117,7 +117,7 @@ strong{font-weight:700; color:var(--paper)}
 .wordmark{display:block; width:100%; max-width:430px; height:auto; margin-bottom:clamp(26px,7vw,36px)}
 .wordmark path{fill:url(#wmg)}
 .hero h1{margin-bottom:18px}
-.hero .lede{margin-bottom:28px; color:var(--mist); font-weight:400}
+.hero .lede{margin-bottom:22px; color:var(--mist); font-weight:400}
 .hero .lede b{color:var(--paper); font-weight:700}
 
 /* reveal-on-load sequence */
@@ -288,6 +288,18 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
 .fit{display:block; font-size:14.5px; line-height:1.7; color:var(--mist)}
 .waitnote{font-size:clamp(16px,4.3vw,18px); font-weight:500; color:var(--paper);
   margin:-10px auto 20px; max-width:34ch}
+.waitnote b, .datechip b{font-family:var(--latin); font-weight:600; color:var(--lilac);
+  direction:ltr; display:inline-block; font-variant-numeric:tabular-nums; letter-spacing:.01em}
+.datechip{display:inline-flex; align-items:center; gap:9px; margin-bottom:20px;
+  font-size:14.5px; font-weight:500; color:var(--paper); line-height:1;
+  background:rgba(192,130,226,.12); border:1px solid var(--line);
+  padding:9px 15px; border-radius:99px}
+.datechip .dot{width:7px; height:7px; border-radius:50%; flex:none; background:var(--lilac);
+  animation:ping 2.6s ease-out infinite}
+@keyframes ping{
+  0%{box-shadow:0 0 0 0 rgba(192,130,226,.55)}
+  70%{box-shadow:0 0 0 10px rgba(192,130,226,0)}
+  100%{box-shadow:0 0 0 0 rgba(192,130,226,0)}}
 .quote{position:relative; padding-inline-start:16px; border-inline-start:2px solid var(--lilac);
   font-size:16px; line-height:1.75; color:var(--paper); font-weight:400}
 </style>
@@ -315,7 +327,12 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
       תחת התוכנית לחשבונאות באוניברסיטת רייכמן.
     </p>
 
-    <div class="cta-row rise" style="animation-delay:.4s">
+    <p class="datechip rise" style="animation-delay:.38s">
+      <span class="dot" aria-hidden="true"></span>
+      ההרשמה נפתחת ב-<b>11/10</b>
+    </p>
+
+    <div class="cta-row rise" style="animation-delay:.46s">
       <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
         <span class="sheen"></span>
         <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
@@ -484,7 +501,7 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   <section class="close" id="close">
     <h2 class="rv">הצטרפו למהפכה.</h2>
     <p class="lede rv" data-d="1" style="font-family:var(--latin);direction:ltr;letter-spacing:.005em">Finance is changing. AI is leading. Join the revolution</p>
-    <p class="waitnote rv" data-d="2">רוצים לקבל גישה להרשמה לפני כולם?</p>
+    <p class="waitnote rv" data-d="2">ההרשמה נפתחת ב-<b>11/10</b>. רוצים לקבל גישה לפני כולם?</p>
     <div class="cta-row rv" data-d="3">
       <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
         <span class="sheen"></span>
