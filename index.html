@@ -329,14 +329,14 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
 
     <p class="datechip rise" style="animation-delay:.38s">
       <span class="dot" aria-hidden="true"></span>
-      ההרשמה נפתחת ב-<b>11/10</b>
+      <span id="openLine">ההרשמה נפתחת ב-<b>11/10</b></span>
     </p>
 
     <div class="cta-row rise" style="animation-delay:.46s">
-      <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
+      <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLScKP0Jc7W0lpDmL2al9ffMxfqJFFuOwE7blpc5zJDUk9l7_6w/viewform" target="_blank" rel="noopener">
         <span class="sheen"></span>
         <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
-        השאירו פרטים כאן
+        להרשמה למועדון
       </a>
       <a class="btn ghost" href="https://www.instagram.com/accountech.ai" target="_blank" rel="noopener">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -501,12 +501,12 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   <section class="close" id="close">
     <h2 class="rv">הצטרפו למהפכה.</h2>
     <p class="lede rv" data-d="1" style="font-family:var(--latin);direction:ltr;letter-spacing:.005em">Finance is changing. AI is leading. Join the revolution</p>
-    <p class="waitnote rv" data-d="2">ההרשמה נפתחת ב-<b>11/10</b>. רוצים לקבל גישה לפני כולם?</p>
+    <p class="waitnote rv" data-d="2" id="hookLine">ההרשמה נפתחת ב-<b>11/10</b>. רוצים להירשם לפני כולם?</p>
     <div class="cta-row rv" data-d="3">
-      <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
+      <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLScKP0Jc7W0lpDmL2al9ffMxfqJFFuOwE7blpc5zJDUk9l7_6w/viewform" target="_blank" rel="noopener">
         <span class="sheen"></span>
         <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
-        השאירו פרטים כאן
+        להרשמה למועדון
       </a>
       <a class="btn ghost" href="https://www.instagram.com/accountech.ai" target="_blank" rel="noopener">אינסטגרם</a>
       <a class="btn ghost" href="https://www.linkedin.com/company/accountech-ai-community/" target="_blank" rel="noopener">לינקדאין</a>
@@ -527,22 +527,33 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
 </main>
 
 <div class="dock" id="dock">
-  <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform" target="_blank" rel="noopener">
+  <a class="btn primary" data-join href="https://docs.google.com/forms/d/e/1FAIpQLScKP0Jc7W0lpDmL2al9ffMxfqJFFuOwE7blpc5zJDUk9l7_6w/viewform" target="_blank" rel="noopener">
     <span class="sheen"></span>
     <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
-    השאירו פרטים כאן
+    להרשמה למועדון
   </a>
 </div>
 
 <script>
 (function () {
-  /* Where the "השאירו פרטים כאן" buttons go. Change it here, and in the
-     three href="" fallbacks in the markup above (they matter only if JS is off).
-     This is the short waiting-list form. When registration opens, swap it for the
-     full registration form and change the button copy back to "טופס הרשמה":
-     https://docs.google.com/forms/d/e/1FAIpQLScKP0Jc7W0lpDmL2al9ffMxfqJFFuOwE7blpc5zJDUk9l7_6w/viewform */
-  var JOIN_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform';
+  /* Where the join buttons go. Change it here, and in the three href=""
+     fallbacks in the markup above (they matter only if JS is off).
+     This is the full registration form for 2026-2027. The early-access form it
+     replaced on 2026-10-08 is kept here in case it is ever needed again:
+     https://docs.google.com/forms/d/e/1FAIpQLSd-QND_qEVmH0C7gb1-JLK6o9_L21h-Wc2oyuTCIqtquemnzg/viewform */
+  var JOIN_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScKP0Jc7W0lpDmL2al9ffMxfqJFFuOwE7blpc5zJDUk9l7_6w/viewform';
   [].slice.call(document.querySelectorAll('a[data-join]')).forEach(function (a) { a.href = JOIN_URL; });
+
+  /* The page invites early sign-ups until registration officially opens, then
+     stops promising a date it has already passed. The markup carries the
+     before-state, so it reads correctly even with no JS. */
+  (function retireTheDate() {
+    if (new Date() < new Date(2026, 9, 11)) return;   // month is 0-based: 9 = October
+    var open = document.getElementById('openLine');
+    if (open) open.textContent = 'ההרשמה למחזור 2026–2027 פתוחה';
+    var hook = document.getElementById('hookLine');
+    if (hook) hook.textContent = 'ההרשמה למחזור 2026–2027 פתוחה. מוזמנים להצטרף.';
+  })();
 
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
