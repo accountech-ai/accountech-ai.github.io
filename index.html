@@ -240,6 +240,8 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   pointer-events:none}
 .dock.on{transform:translateY(0); pointer-events:auto}
 .dock .btn{width:100%; max-width:var(--col); justify-content:center}
+/* after registration closes there is nothing for the bar to offer */
+.reg-closed .dock{display:none}
 
 /* ─────────────────  progress rail  ───────────────── */
 .rail{position:fixed; top:0; inset-inline-start:0; height:3px; z-index:50; width:var(--prog,0%);
@@ -301,6 +303,7 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
   padding:9px 15px; border-radius:99px}
 .datechip .dot{width:7px; height:7px; border-radius:50%; flex:none; background:var(--lilac);
   animation:ping 2.6s ease-out infinite}
+.reg-closed .datechip .dot{animation:none; background:var(--line)}
 @keyframes ping{
   0%{box-shadow:0 0 0 0 rgba(192,130,226,.55)}
   70%{box-shadow:0 0 0 10px rgba(192,130,226,0)}
@@ -555,6 +558,32 @@ footer{position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.07);
     var hook = document.getElementById('hookLine');
     if (hook) hook.textContent = 'ההרשמה למחזור 2026–2027 פתוחה. מוזמנים להצטרף.';
   })();
+
+  /* Registration closed on Thu 22.10.2026 at 17:00 Israel time (still IDT, UTC+3).
+     From then on the join buttons go and Instagram takes their place. A page left
+     open across 17:00 flips on the minute. */
+  var CLOSES_AT = Date.UTC(2026, 9, 22, 14, 0);
+  function closeRegistration() {
+    document.documentElement.classList.add('reg-closed');
+    var open = document.getElementById('openLine');
+    if (open) open.textContent = 'ההרשמה למחזור 2026–2027 נסגרה';
+    var hook = document.getElementById('hookLine');
+    if (hook) hook.textContent = 'ההרשמה למחזור 2026–2027 נסגרה. תודה לכל מי שנרשם 💜';
+    [].slice.call(document.querySelectorAll('a[data-join]')).forEach(function (a) {
+      if (!a.closest('.dock')) a.remove();
+    });
+    [].slice.call(document.querySelectorAll('.cta-row a[href*="instagram.com"]')).forEach(function (a) {
+      a.classList.remove('ghost');
+      a.classList.add('primary');
+      var label = [].slice.call(a.childNodes).filter(function (n) {
+        return n.nodeType === 3 && n.textContent.trim();
+      })[0];
+      if (label) label.textContent = ' עקבו באינסטגרם ';
+    });
+  }
+  var untilClose = CLOSES_AT - Date.now();
+  if (untilClose <= 0) closeRegistration();
+  else if (untilClose < 864e5) setTimeout(closeRegistration, untilClose);
 
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
