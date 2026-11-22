@@ -8,6 +8,17 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIwIiB4Mj0iNTEyIiB5Mj0iMCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNkUxMDUwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMEEyMjQ4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNTYiIGZpbGw9InVybCgjZykiLz48ZyBmaWxsPSIjRkZGRkZGIj48cGF0aCB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjYuNTMwLDM4Mi45NzYpIHNjYWxlKDAuMzg0MTg1LC0wLjM4NDE4NSkiIGQ9Ik00ODkgMTU1SDE4NUwxMjkgMEgzM0wyODUgNjkzSDM5MEw2NDEgMEg1NDVaTTQ2MyAyMjkgMzM3IDU4MSAyMTEgMjI5WiIvPjwvZz48L3N2Zz4=" type="image/svg+xml">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIwIiB4Mj0iNTEyIiB5Mj0iMCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNkUxMDUwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMEEyMjQ4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNTYiIGZpbGw9InVybCgjZykiLz48ZyBmaWxsPSIjRkZGRkZGIj48cGF0aCB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjYuNTMwLDM4Mi45NzYpIHNjYWxlKDAuMzg0MTg1LC0wLjM4NDE4NSkiIGQ9Ik00ODkgMTU1SDE4NUwxMjkgMEgzM0wyODUgNjkzSDM5MEw2NDEgMEg1NDVaTTQ2MyAyMjkgMzM3IDU4MSAyMTEgMjI5WiIvPjwvZz48L3N2Zz4=">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Accountech AI">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="אישור הגעה · מפגש 5 ב-EY">
+<meta property="og:description" content="רן מתוקי · יום ראשון 29.11 · התכנסות 18:30 במידטאון, תל אביב. הכניסה ל-EY באישור מראש: שם, טלפון, וזהו.">
+<meta property="og:url" content="https://accountech-ai.github.io/rsvp/">
+<meta property="og:image" content="https://accountech-ai.github.io/rsvp/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://accountech-ai.github.io/rsvp/og.jpg">
 </head>
 <body>
 <title>Accountech AI · אישור הגעה</title>
@@ -183,14 +194,14 @@ input:focus{border-color:var(--lilac); background:rgba(255,255,255,.09)}
 /* ── the evening ─────────────────────────────────────────────────────────
    One event per page load. To reuse the page, change EVENT and FORM (a new
    Google Form per event keeps each guest list in its own Sheet).
-   time/address stay null until confirmed - the page simply leaves them out. */
+   time/address may be null - the page simply leaves them out. */
 const EVENT = {
   n:       5,
   date:    "2026-11-29",
   speaker: "רן מתוקי · מייסד CFO to Tech",
   place:   "EY",             // shown as "ב-EY"
-  time:    null,             // e.g. "19:00"
-  address: null,             // e.g. "מנחם בגין 144, תל אביב"
+  time:    "התכנסות 18:30 · מתחילים 19:00",
+  address: "מידטאון, דרך מנחם בגין 144א, תל אביב",
 };
 
 /* ── Google Form behind the page ─────────────────────────────────────────
@@ -220,7 +231,7 @@ $("eyebrow").innerHTML = `מפגש <bdi>${pad(EVENT.n)}</bdi> · <bdi>${d}.${mo}
 $("h1place").innerHTML = `ב-${iso(EVENT.place)}?`;
 $("sub").innerHTML = `המפגש הבא אצל ${iso(EVENT.place)}, והכניסה לבניין רק עם אישור שמכינים מראש. חצי דקה ואתם ברשימה.`;
 $("evSpeaker").textContent = EVENT.speaker;
-$("evWhen").textContent = [`${weekday}, ${d}.${mo}`, EVENT.time, EVENT.address || `משרדי ${EVENT.place}`].filter(Boolean).join(" · ");
+$("evWhen").innerHTML = [`${weekday}, ${d}.${mo}`, EVENT.time, EVENT.address || `משרדי ${EVENT.place}`].filter(Boolean).map(esc).join("<br>");
 $("phoneHint").innerHTML = `רק בשביל אישור הכניסה ל-${iso(EVENT.place)}.`;
 $("doneDisc").src = $("disc").src;   // one inlined copy of the disc, not two
 
