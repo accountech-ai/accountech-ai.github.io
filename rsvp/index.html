@@ -170,13 +170,13 @@ input:focus{border-color:var(--lilac); background:rgba(255,255,255,.09)}
       <div class="card" role="radiogroup" aria-labelledby="goingQ">
         <p class="legend" id="goingQ">מגיעים?</p>
         <div class="choices">
-          <label class="choice"><input type="radio" name="going" value="מגיע/ה בוודאות"><span>בוודאות<small>שמרו לי מקום</small></span></label>
-          <label class="choice"><input type="radio" name="going" value="אולי"><span>אולי<small>עוד לא בטוח/ה</small></span></label>
+          <label class="choice"><input type="radio" name="going" value="מגיע/ה"><span>כן<small>שמרו לי אישור כניסה</small></span></label>
+          <label class="choice"><input type="radio" name="going" value="לא מגיע/ה"><span>לא<small>הפעם לא אגיע</small></span></label>
         </div>
       </div>
 
       <p class="err" id="err" role="alert"></p>
-      <button class="btn" id="go" type="submit">אישור הגעה</button>
+      <button class="btn" id="go" type="submit">שליחה</button>
     </form>
   </section>
 
@@ -244,12 +244,13 @@ function normPhone(raw) {
 
 function showDone(v, again) {
   $("ask").hidden = true; $("done").hidden = false;
-  const sure = v.going !== "אולי";
-  $("doneTitle").innerHTML = sure
+  const yes = v.going.startsWith("מגיע");   // also the old "מגיע/ה בוודאות"
+  $("doneTitle").innerHTML = yes
     ? `מעולה, ${esc(v.first)}. <span class="grad">נתראה ב-${iso(EVENT.place)}.</span>`
-    : `רשמנו, ${esc(v.first)}. <span class="grad">נשמח לראות אותך.</span>`;
-  $("doneSub").textContent = (again ? "כבר אישרת הגעה. " : "")
-    + (sure ? "ניפגש שם 💜" : "נכין לך אישור כניסה בכל מקרה 💜");
+    : `תודה שעדכנת, ${esc(v.first)}. <span class="grad">נתראה בפעם הבאה.</span>`;
+  $("doneSub").textContent = (again ? (yes ? "כבר אישרת הגעה. " : "כבר עדכנת שלא תגיע/י. ") : "")
+    + (yes ? "ניפגש שם 💜" : "משהו השתנה? אפשר לחזור לכאן ולשנות 💜");
+  $("change").textContent = yes ? "לא אוכל להגיע? שינוי תשובה" : "בכל זאת מגיע/ה? שינוי תשובה";
 }
 
 /* returning visitor: details are prefilled, and a done answer shows straight away */
@@ -257,10 +258,15 @@ const me = store.get("me");
 if (me) { $("first").value = me.first || ""; $("last").value = me.last || ""; $("phone").value = me.phone || ""; }
 const prev = store.get("done:" + EVENT.n);
 if (prev) {
-  const r = document.querySelector(`input[name=going][value="${prev.going}"]`); if (r) r.checked = true;
   showDone(prev, true);
 }
-$("change").onclick = () => { $("done").hidden = true; $("ask").hidden = false; $("go").disabled = false; $("go").textContent = "עדכון תשובה"; };
+/* changing an answer just sends again: the Sheet keeps every row, and its "סיכום" tab takes the latest per phone */
+$("change").onclick = () => {
+  $("done").hidden = true; $("ask").hidden = false; $("go").disabled = false; $("go").textContent = "עדכון תשובה";
+  const cur = store.get("done:" + EVENT.n);   // preselect the other answer - that's why they came back
+  const wasYes = !!(cur && cur.going && cur.going.startsWith("מגיע"));
+  document.querySelector(`input[name=going][value="${wasYes ? "לא מגיע/ה" : "מגיע/ה"}"]`).checked = true;
+};
 
 function fields(v) {
   return [[FORM.first, v.first], [FORM.last, v.last], [FORM.phone, v.phone], [FORM.going, v.going]];
@@ -280,7 +286,7 @@ $("f").addEventListener("submit", async e => {
   if (!v.first) { err.textContent = "חסר שם פרטי."; $("first").focus(); return; }
   if (!v.last)  { err.textContent = "חסר שם משפחה."; $("last").focus(); return; }
   if (!v.phone) { err.textContent = "מספר נייד בפורמט 05X-XXXXXXX, בבקשה."; $("phone").focus(); return; }
-  if (!v.going) { err.textContent = "בוודאות או אולי?"; return; }
+  if (!v.going) { err.textContent = "מגיעים? כן או לא."; return; }
   if (!FORM.id) { err.textContent = "הטופס עוד לא מחובר."; return; }
 
   const go = $("go"); go.disabled = true; go.textContent = "שולחים…";
@@ -294,7 +300,7 @@ $("f").addEventListener("submit", async e => {
     $("phone").value = v.phone;
     showDone(v, false);
   } catch (x) {
-    go.disabled = false; go.textContent = "אישור הגעה";
+    go.disabled = false; go.textContent = "שליחה";
     err.innerHTML = `השליחה לא עברה. <a href="${prefillUrl(v)}" target="_blank" rel="noopener">שלחו מכאן ←</a>`;
   }
 });
