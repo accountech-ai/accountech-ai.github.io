@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Accountech AI">
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="מפגש 5 ב-EY · כל מה שצריך">
-<meta property="og:description" content="רן מתוקי · יום ראשון 29.11 · התכנסות 18:30 במידטאון. אישור הגעה, על מה נדבר, איך מגיעים, חניה וטרמפים. ומחכות לכם הפתעות ומתנות 🎁">
+<meta property="og:description" content="רן מתוקי · יום ראשון 29.11 · התכנסות 18:30 במידטאון. אישור הגעה, מי זה רן, איך מגיעים, חניה וטרמפים. ומחכה לכם הפתעה חמודה 🎁">
 <meta property="og:url" content="https://accountech-ai.github.io/rsvp/">
 <meta property="og:image" content="https://accountech-ai.github.io/rsvp/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -346,7 +346,7 @@ input:focus,select:focus{border-color:var(--lilac); background-color:rgba(255,25
 
     <button type="button" class="gift rise" id="gift" aria-live="polite">
       <span class="box" aria-hidden="true"><i class="bd"></i><i class="rb"></i><i class="ld"></i><i class="bw"></i></span>
-      <span class="gtxt"><b id="giftT">מחכות לכם הפתעות ומתנות</b><small id="giftS">הקישו על הקופסה</small></span>
+      <span class="gtxt"><b id="giftT">מחכה לכם הפתעה חמודה</b><small id="giftS">הקישו על הקופסה</small></span>
     </button>
   </header>
 
@@ -386,7 +386,7 @@ input:focus,select:focus{border-color:var(--lilac); background-color:rgba(255,25
         <img class="disc" id="doneDisc" alt="">
         <h3 id="doneTitle"></h3>
         <p id="doneSub"></p>
-        <p class="gline" id="doneGift" hidden>🎁 מחכות לכם הפתעות ומתנות</p>
+        <p class="gline" id="doneGift" hidden>🎁 מחכה לכם הפתעה חמודה</p>
         <button type="button" class="link" id="change">שינוי תשובה</button>
       </div>
     </div>
@@ -602,13 +602,13 @@ function tick() {
 }
 tick();
 
-/* the gift: surprises, no details - that's the point */
+/* the gift: a surprise, no details - that's the point */
 $("gift").addEventListener("click", () => {
   const g = $("gift");
   if (g.classList.contains("open")) return;
   g.classList.add("open");
   $("giftT").innerHTML = "את זה תגלו ב-<bdi>29.11</bdi> 🎁";
-  $("giftS").textContent = "הפתעות ומתנות מחכות לכם במפגש";
+  $("giftS").textContent = "הפתעה חמודה מחכה לכם במפגש";
   if (reduce) return;
   const box = g.querySelector(".box").getBoundingClientRect(), gr = g.getBoundingClientRect();
   const cols = ["#FFE600", "#C082E2", "#61A5FA", "#FFFFFF", "#7FE3C1"];
